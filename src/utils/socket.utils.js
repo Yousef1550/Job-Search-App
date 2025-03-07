@@ -12,7 +12,7 @@ const registerSocketId = async (handshake, sId) => {
     const authUser = await validateUserToken(accesstoken)
 
     // attach socketId to user _id
-    socketConnections.set(authUser._id.toString(), sId)
+    socketConnections.set(authUser?._id?.toString(), sId)
 
     console.log('Socket Connected', socketConnections);
 }
@@ -24,7 +24,7 @@ const removeSocketId = async (socket) => {
 
         const authUser = await validateUserToken(accesstoken)
     
-        socketConnections.delete(authUser._id.toString())
+        socketConnections.delete(authUser?._id?.toString())
         
         console.log('Socket Disconnected', socketConnections);
 
