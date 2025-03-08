@@ -1,4 +1,5 @@
 import { validateUserToken } from "../Middleware/authentication.middleware.js"
+import { sendMessageService } from "../Modules/User/services/chat.service.js"
 
 
 export const socketConnections = new Map
@@ -37,6 +38,8 @@ export const establsihIoConnection = (io) => {
     io.on('connection', async (socket) => {
 
         await registerSocketId(socket.handshake, socket.id)
+
+        await sendMessageService(socket)
 
         await removeSocketId(socket)
     })
